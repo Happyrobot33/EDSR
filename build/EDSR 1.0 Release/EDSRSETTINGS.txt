@@ -1,0 +1,12 @@
+ED Journal Folder:
+C:\Users\matth\Saved Games\Frontier Developments\Elite Dangerous
+Songs Folder (Must be mp3s)
+C:\Users\matth\Music\wavs\
+Battle Songs Folder (Must be mp3s)
+C:\Users\matth\Music\battle
+Battle Songs Enabled?
+True
+Song Volume:
+0.15
+Remind about requesting docking?
+True
