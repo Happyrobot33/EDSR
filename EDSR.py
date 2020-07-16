@@ -150,6 +150,12 @@ getRecentJournal()
 playRandSong()
 while True:
     global sound_volume
+
+    #if the last event should deactivate battle mode
+    if last_event in end_combat_event_list and in_battle == True:
+        in_battle = False
+        playRandSong()
+
     if(song_remaining < 0):
         getRecentJournal()
         playRandSong()
@@ -166,12 +172,12 @@ while True:
     clear()
     #ASCII ART
     print(fg.orange + "  ______   _____     _____   _____  ")
-    print(" |  ____| |  __ \   / ____| |  __ \ ")
-    print(" | |__    | |  | | | (___   | |__) |   _     __  ")
-    print(" |  __|   | |  | |  \___ \  |  _  /   / |   /  \ ")
-    print(" | |____  | |__| |  ____) | | | \ \   | | _| () |")
-    print(" |______| |_____/  |_____/  |_|  \_\\  |_|(_)\__/ ")
-    print("                                                    ")
+    print(" |  ____| |  __ \   / ____| |  __ \    _   ____  ")
+    print(" | |__    | |  | | | (___   | |__) |  / | |___ \ ")
+    print(" |  __|   | |  | |  \___ \  |  _  /   | |   __) |")
+    print(" | |____  | |__| |  ____) | | | \ \   | |_ / __/ ")
+    print(" |______| |_____/  |_____/  |_|  \_\\  |_(_)_____|")
+    print("                                               ")
 
     print("------Song Info------")
     print("Current Song: " + current_song.split('.')[0])
@@ -211,11 +217,6 @@ while True:
     #if the last event should trigger battle mode
     if last_event in start_combat_event_list and in_battle == False and battle_songs_enabled:
         in_battle = True
-        playRandSong()
-
-    #if the last event should deactivate battle mode
-    if last_event in end_combat_event_list and in_battle == True:
-        in_battle = False
         playRandSong()
 
     time.sleep(.25)
