@@ -8,7 +8,7 @@
 #Dependencys needed:
 #pygame, mutagen, pypiwin32
 import os, winsound, random, wave, contextlib, time, pygame, glob, win32com.client, sys
-from sty import fg, RgbFg, Style, rs
+from sty import fg, RgbFg, Style, rs, ef
 from mutagen.mp3 import MP3
 clear = lambda: os.system('cls')
 pygame.mixer.init()
@@ -17,6 +17,7 @@ fg.orange = Style(RgbFg(255, 90, 0))
 fg.yellow = Style(RgbFg(255, 204, 0))
 
 journal_path = ''
+current_user_dir = os.path.expanduser("~")
 ED_Journal_Folder = 'C:\\Users\matth\Saved Games\Frontier Developments\Elite Dangerous'
 songs_path = 'C:\\Users\matth\Music\wavs'
 battle_songs_path = 'C:\\Users\matth\Music\wavs'
@@ -36,9 +37,15 @@ def readSettings():
     global battle_songs_path
     global battle_songs_enabled
     global docking_reminder
+
     with open(os.path.join(sys.path[0], "EDSRSETTINGS.txt"), "r") as f:
         lines = f.readlines()
+
     ED_Journal_Folder = lines[1].rstrip("\n")
+    if ED_Journal_Folder == "":
+        print("Automatically finding Journal Folder....")
+        ED_Journal_Folder = current_user_dir + "\\Saved Games\\Frontier Developments\\Elite Dangerous"
+        print("Journal Folder Found!")
     songs_path = lines[3].rstrip("\n")
     battle_songs_path = lines[5].rstrip("\n")
     battle_songs_enabled = lines[7].rstrip("\n") == "True"
@@ -153,29 +160,25 @@ while True:
         last_line = f.readline().decode()
 
     last_event = last_line[47:].split('"')[0]
-    if True:
-        clear()
 
-        #ASCII ART
-        print(fg.orange + "  ______   _____     _____   _____  ")
-        print(" |  ____| |  __ \   / ____| |  __ \ ")
-        print(" | |__    | |  | | | (___   | |__) |   _     __  ")
-        print(" |  __|   | |  | |  \___ \  |  _  /   / |   /  \ ")
-        print(" | |____  | |__| |  ____) | | | \ \   | | _| () |")
-        print(" |______| |_____/  |_____/  |_|  \_\\  |_|(_)\__/ ")
-        print("                                                    ")
+    clear()
+    #ASCII ART
+    print(fg.orange + "  ______   _____     _____   _____  ")
+    print(" |  ____| |  __ \   / ____| |  __ \ ")
+    print(" | |__    | |  | | | (___   | |__) |   _     __  ")
+    print(" |  __|   | |  | |  \___ \  |  _  /   / |   /  \ ")
+    print(" | |____  | |__| |  ____) | | | \ \   | | _| () |")
+    print(" |______| |_____/  |_____/  |_|  \_\\  |_|(_)\__/ ")
+    print("                                                    ")
 
-
-        print("------Song Info------")
-        print("Current Song: " + current_song.split('.')[0])
-        printProgressBar(song_duration - song_remaining, song_duration)
-        print()
-        print("Song Volume: " + str(round(pygame.mixer.music.get_volume() * 100)) + "%")
-        print("--------------------")
-        print("Event: " + last_event) #If fuel scooping, every 5 units the journal gets updated. can be used to determine if finished fuelscooping if the ammount is less than 5
-        pygame.mixer.music.set_volume(song_volume)
-        #if joy1.get_button(1) or joy1.get_button(3):
-            #last_event = "StartJump"
+    print("------Song Info------")
+    print("Current Song: " + current_song.split('.')[0])
+    printProgressBar(song_duration - song_remaining, song_duration)
+    print()
+    print("Song Volume: " + str(round(pygame.mixer.music.get_volume() * 100)) + "%")
+    print("--------------------")
+    print("Event: " + last_event) #If fuel scooping, every 5 units the journal gets updated. can be used to determine if finished fuelscooping if the ammount is less than 5
+    pygame.mixer.music.set_volume(song_volume)
 
     print("------Status---------")
 
