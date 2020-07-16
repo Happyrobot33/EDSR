@@ -75,6 +75,7 @@ fade_event_list = {
   "ReceiveText": 5,
   "DockingDenied": 13,
   "JetConeBoost": 3,
+  "FighterDestroyed": 3
 }
 
 fade_text_notifs_list = ["NoFireZone"]
