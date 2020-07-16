@@ -11,6 +11,8 @@ import os, winsound, random, wave, contextlib, time, pygame, glob, win32com.clie
 from sty import fg, RgbFg, Style, rs, ef
 from mutagen.mp3 import MP3
 clear = lambda: os.system('cls')
+os.system('mode con: cols=100 lines=20') #setup default window size. this also fixes the flickering issue for some users
+
 pygame.mixer.init()
 
 fg.orange = Style(RgbFg(255, 90, 0))
