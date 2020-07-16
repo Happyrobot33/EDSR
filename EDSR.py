@@ -7,7 +7,7 @@
 
 #Dependencys needed:
 #pygame, mutagen, pypiwin32
-import os, winsound, random, wave, contextlib, time, pygame, glob, win32com.client, sys
+import os, winsound, random, wave, contextlib, time, pygame, glob, win32com.client, sys, pyfiglet
 from sty import fg, RgbFg, Style, rs, ef
 from mutagen.mp3 import MP3
 clear = lambda: os.system('cls')
@@ -15,8 +15,10 @@ os.system('mode con: cols=100 lines=20') #setup default window size. this also f
 
 pygame.mixer.init()
 
+#style stuff
 fg.orange = Style(RgbFg(255, 90, 0))
 fg.yellow = Style(RgbFg(255, 204, 0))
+title_fig = pyfiglet.Figlet(font='big')
 
 journal_path = ''
 current_user_dir = os.path.expanduser("~")
@@ -122,7 +124,6 @@ def dockingReminder():
         print(rs.fg + fg.yellow + "REMEMBER TO REQUEST DOCKING")
         print(fg.orange + "--------------------")
         speaker.Speak("Dont forget to request docking commander")
-        input()
         pygame.mixer.music.set_volume(unfaded_volume)
 
 def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, length = 30, fill = '▪', printEnd = "\r"):
@@ -171,14 +172,9 @@ while True:
     last_event = last_line[47:].split('"')[0]
 
     clear()
-    #ASCII ART
-    print(fg.orange + "  ______   _____     _____   _____  ")
-    print(" |  ____| |  __ \   / ____| |  __ \    _   ____  ")
-    print(" | |__    | |  | | | (___   | |__) |  / | |___ \ ")
-    print(" |  __|   | |  | |  \___ \  |  _  /   | |   __) |")
-    print(" | |____  | |__| |  ____) | | | \ \   | |_ / __/ ")
-    print(" |______| |_____/  |_____/  |_|  \_\\  |_(_)_____|")
-    print("                                               ")
+
+    #ASCII Art
+    print(fg.orange + title_fig.renderText('EDSR   v1.22').rsplit("\n",3)[0])
 
     print("------Song Info------")
     print("Current Song: " + current_song.split('.')[0])
@@ -194,6 +190,8 @@ while True:
     #Determine if to fade music
     if last_event in fade_event_list and last_line != previous_line:
         if last_event == "ReceiveText":
+            print("Running Normally")
+            print("--------------------")
             if not "NoFireZone" in last_line:
                 time.sleep(.25)
                 continue
