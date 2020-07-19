@@ -7,12 +7,14 @@ Default:
 ED Journal Folder (Leave blank to automatically find it):
 
 Songs Folder (Must be mp3s)
-C:\Users\<<<CHANGE TO YOUR USER>>>\Music\wavs
+
 Battle Songs Folder (Must be mp3s)
-C:\Users\<<<CHANGE TO YOUR USER>>>\Music\battle
+
 Battle Songs Enabled?
 True
-Song Volume:
-0.15
-Remind about requesting docking?
+Song Volume (%):
+15
+Docking Reminder? (TTS)
 True
+Song Playback Mode(Shuffle, Random, InOrder)
+Shuffle
