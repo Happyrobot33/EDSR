@@ -6,7 +6,9 @@ Battle Songs Folder (Must be mp3s)
 C:\Users\matth\Music\battle
 Battle Songs Enabled?
 True
-Song Volume:
-0.15
-Remind about requesting docking (TTS)?
+Song Volume (%):
+15
+Docking Reminder? (TTS)
 True
+Song Playback Mode(Shuffle, Random, InOrder)
+Shuffle
