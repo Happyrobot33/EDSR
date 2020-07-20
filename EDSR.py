@@ -7,7 +7,7 @@
 
 #Dependencys needed:
 #pygame, mutagen, pypiwin32, sty
-import os, winsound, random, wave, contextlib, time, pygame, glob, win32com.client, sys, pyfiglet
+import os, winsound, random, wave, contextlib, time, pygame, glob, win32com.client, sys, pyfiglet, msvcrt
 from sty import fg, RgbFg, Style, rs, ef
 from mutagen.mp3 import MP3
 clear = lambda: os.system('cls')
@@ -110,10 +110,10 @@ def printUI():
     global song_remaining
     global last_event
     clear()
-    print(fg.orange + title_fig.renderText('EDSR   v1.31').rsplit("\n",3)[0])
+    print(fg.orange + title_fig.renderText('EDSR   v1.32').rsplit("\n",3)[0])
 
     print("------Song Info------")
-    print("Current Song (" + song_selection_method + "): " + current_song.split('.')[0])
+    print("Current Song (" + song_selection_method + "): " + current_song.split('.mp3')[0])
     printProgressBar(song_duration - song_remaining, song_duration)
     print()
     print("Song Volume: " + str(round(pygame.mixer.music.get_volume() * 100)) + "%")
@@ -129,6 +129,7 @@ def readSettings():
     global battle_songs_enabled
     global docking_reminder
     global song_selection_method
+    global next_song_keybind
 
     try:
         with open(os.path.join(sys.path[0], "EDSRSETTINGS.txt"), "r") as f:
@@ -149,6 +150,7 @@ def readSettings():
     song_volume = float(lines[9].rstrip("\n")) / 100
     docking_reminder = lines[11].rstrip("\n") == "True"
     song_selection_method = lines[13].rstrip("\n")
+    next_song_keybind = lines[15].rstrip("\n").lower()
 
     if not os.path.isdir(battle_songs_path):
         print(fg.yellow + "WARNING!!!! BATTLE SONGS PATH IS INCORRECT")
@@ -182,6 +184,7 @@ in_battle = False
 docking_reminder = False
 song_selection_method = "Shuffle"
 song_volume = 0.15
+next_song_keybind = "l"
 
 speaker = win32com.client.Dispatch("SAPI.SpVoice")
 speaker.Voice = speaker.GetVoices().Item(0)
@@ -239,6 +242,12 @@ while True:
     if(song_remaining < 0):
         getRecentJournal()
         playSong()
+
+
+    if msvcrt.kbhit():
+        if str(msvcrt.getch())[2:3] == next_song_keybind:
+            getRecentJournal()
+            playSong()
 
     prev_last_event = last_event
     with open(journal_path, 'rb') as f:

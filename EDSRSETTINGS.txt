@@ -12,3 +12,5 @@ Docking Reminder? (TTS)
 True
 Song Playback Mode(Shuffle, Random, InOrder)
 Shuffle
+Next Song Keybind
+L
