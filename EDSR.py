@@ -110,7 +110,7 @@ def printUI():
     global song_remaining
     global last_event
     clear()
-    print(fg.orange + title_fig.renderText('EDSR   v1.3').rsplit("\n",3)[0])
+    print(fg.orange + title_fig.renderText('EDSR   v1.31').rsplit("\n",3)[0])
 
     print("------Song Info------")
     print("Current Song (" + song_selection_method + "): " + current_song.split('.')[0])
