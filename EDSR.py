@@ -249,7 +249,7 @@ while True:
 
     last_event = last_line[47:].split('"')[0]
 
-    if execution_count == print_on_count:
+    if execution_count >= print_on_count:
         printUI()
 
     pygame.mixer.music.set_volume(song_volume)
@@ -257,11 +257,10 @@ while True:
     #Determine if to fade music
     if last_event in fade_event_list and last_line != previous_line:
         if last_event == "ReceiveText":
-            if execution_count == print_on_count:
+            if execution_count >= print_on_count:
                 print("Running Normally")
                 print("--------------------")
             if not "NoFireZone" in last_line:
-                time.sleep(.25)
                 continue
         previous_line = last_line
         unfaded_volume = pygame.mixer.music.get_volume()
@@ -271,7 +270,7 @@ while True:
         print("--------------------")
         time.sleep(fade_event_list[last_event])
         pygame.mixer.music.set_volume(unfaded_volume)
-    elif execution_count == print_on_count:
+    elif execution_count >= print_on_count:
         if not in_battle:
             print("Running Normally")
         else:
@@ -290,7 +289,7 @@ while True:
     time.sleep(.0625)
     song_remaining = song_duration - (time.time() - song_start_time)
 
-    if execution_count == print_on_count:
+    if execution_count >= print_on_count:
         execution_count = 0
 
 input() #stop the console window from closing
