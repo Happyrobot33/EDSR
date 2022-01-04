@@ -1,5 +1,4 @@
-#DEPRECATED
-##NEW VERSION HERE https://github.com/Happyrobot33/EDRADIO
+# DEPRECATED, NEW VERSION HERE https://github.com/Happyrobot33/EDRADIO
 In order to use, you need to create 2 folders.
 1 folder for normally playing songs and another folder for battle songs
 make sure there is ONLY mp3 files in either of these folders. also ensure there are no subfolders.
